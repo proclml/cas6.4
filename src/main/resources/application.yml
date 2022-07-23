@@ -1,0 +1,30 @@
+# Application properties that need to be
+# embedded within the web application can be included here
+
+cas:
+  server:
+    # 配置单点登录服务器访问地址
+    name: http://127.0.0.1:8443
+    prefix: ${cas.server.name}/cas
+  authn:
+    accept:
+      # 设置登录账号和密码，默认为 casuser::Mellon
+      users: admin::admin
+  # service-registry:
+  #   # 设置服务注册为json文件的方式
+  #   init-from-json: true
+  #   json:
+  #     #　服务注册时读取的json文件的位置
+  #     location: classpath:/services
+  # authn:
+  #   ldap[0]:
+  #     base-dn: dc=example,dc=com
+  #     bind-credential: password
+  #     bind-dn: cn=Manager,dc=example,dc=com
+  #     ldap-url: ldap://127.0.0.1:389
+  #     search-filter: mail={user}
+
+server:
+  ssl:
+    # 关闭https访问，此处如果已经有了https证书，可以设为true
+    enabled: false
