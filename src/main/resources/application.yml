@@ -5,25 +5,26 @@ cas:
   server:
     name: http://127.0.0.1:8443
     prefix: ${cas.server.name}/cas
-  # authn:
-  #   accept:
-  #     # set static user, default is casuser::Mellon
-  #     users: admin::admin
-  # service-registry:
-  #   # 设置服务注册为json文件的方式
-  #   init-from-json: true
-  #   json:
-  #     #　服务注册时读取的json文件的位置
-  #     location: classpath:/services
+  service-registry:
+    core:
+      init-from-json: true
+    json:
+      #　服务注册时读取的json文件的位置
+      location: classpath:/services
   authn:
+    accept:
+      enabled: false
+      # # set static user, default is casuser::Mellon
+      # users: admin::admin
     ldap[0]:
       type: AUTHENTICATED
       base-dn: dc=example,dc=com
       bind-credential: password
       bind-dn: cn=Manager,dc=example,dc=com
       ldap-url: ldap://127.0.0.1:389
-      search-filter: mail={user}
-      principal-attribute-list: mail
+      search-filter: cn={user}
+      principal-attribute-list: mail,cn
+      use-start-tls: false
 
 server:
   ssl:

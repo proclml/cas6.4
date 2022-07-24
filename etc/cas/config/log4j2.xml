@@ -148,7 +148,10 @@ Set -Dlog4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContext
         <Logger name="net.sf.ehcache" level="warn"/>
         <Logger name="net.jradius" level="warn"/>
         <Logger name="org.openid4java" level="warn"/>
-        <Logger name="org.ldaptive" level="${sys:ldap.log.level}"/>
+        <Logger name="org.ldaptive" level="debug" additivity="false">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+        </Logger>
         <Logger name="com.hazelcast" level="${sys:hazelcast.log.level}" />
         <Logger name="org.jasig.spring" level="warn" />
         <Logger name="org.apache.cxf" level="warn" />
