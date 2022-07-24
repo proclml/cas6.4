@@ -64,6 +64,7 @@ repositories {
     }
 }
 
+apply plugin: "io.spring.dependency-management"
 apply plugin: "io.freefair.war-overlay"
 apply plugin: "war"
 apply plugin: "org.springframework.boot"
@@ -73,6 +74,11 @@ apply from: rootProject.file("gradle/springboot.gradle")
 apply from: rootProject.file("gradle/jib.gradle")
 apply from: rootProject.file("gradle/tasks.gradle")
 
+dependencyManagement {
+    imports {
+        mavenBom "org.apereo.cas:cas-server-support-bom:${project.'cas.version'}"
+    }
+}
 
 configurations.all {
     resolutionStrategy {
@@ -110,11 +116,6 @@ bootBuildImage {
 }
 
 dependencies {
-    /**
-    * Do NOT modify the lines below or else you will risk breaking dependency management.
-    */
-    implementation enforcedPlatform("org.apereo.cas:cas-server-support-bom:${project.'cas.version'}")
-    implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
 
     /**
      * CAS dependencies and modules may be listed here.
@@ -126,9 +127,7 @@ dependencies {
 
     implementation "org.apereo.cas:cas-server-core-api-configuration-model"
     implementation "org.apereo.cas:cas-server-webapp-init"
-    // implementation "org.apereo.cas:cas-server-support-json-service-registry:${project.'cas.version'}"
-    // implementation "org.apereo.cas:cas-server-support-ldap:${project.'cas.version'}"
-
+    implementation "org.apereo.cas:cas-server-support-ldap:${project.'cas.version'}"
 
     if (project.hasProperty("casModules")) {
         def dependencies = project.getProperty("casModules").split(",")

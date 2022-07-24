@@ -84,7 +84,7 @@ bootRun {
 
 springBoot {
     buildInfo()
-    mainClass = "org.apereo.cas.web.CasWebApplication"
+    mainClassName = "org.apereo.cas.web.CasWebApplication"
     
     
     
